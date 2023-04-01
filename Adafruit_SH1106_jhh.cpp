@@ -1,11 +1,11 @@
 /*!
  * @file Adafruit_SH1106_jhh.cpp
  *
- * @mainpage Arduino library for monochrome OLEDs based on SSD1306 drivers.
+ * @mainpage Arduino library for monochrome OLEDs based on SH1106 drivers.
  *
  * @section intro_sec Introduction
  *
- * This is documentation for Adafruit's SSD1306 library for monochrome
+ * This is documentation for Adafruit's SH1106 library for monochrome
  * OLED displays: http://www.adafruit.com/category/63_98
  *
  * These displays use I2C or SPI to communicate. I2C requires 2 pins
@@ -140,7 +140,7 @@
 // CONSTRUCTORS, DESTRUCTOR ------------------------------------------------
 
 /*!
-    @brief  Constructor for I2C-interfaced SSD1306 displays.
+    @brief  Constructor for I2C-interfaced SH1106 displays.
     @param  w
             Display width in pixels
     @param  h
@@ -153,16 +153,16 @@
             (some displays might be wired to share the microcontroller's
             reset pin).
     @param  clkDuring
-            Speed (in Hz) for Wire transmissions in SSD1306 library calls.
+            Speed (in Hz) for Wire transmissions in SH1106 library calls.
             Defaults to 400000 (400 KHz), a known 'safe' value for most
-            microcontrollers, and meets the SSD1306 datasheet spec.
+            microcontrollers, and meets the SH1106 datasheet spec.
             Some systems can operate I2C faster (800 KHz for ESP32, 1 MHz
             for many other 32-bit MCUs), and some (perhaps not all)
-            SSD1306's can work with this -- so it's optionally be specified
+            SH1106's can work with this -- so it's optionally be specified
             here and is not a default behavior. (Ignored if using pre-1.5.7
             Arduino software, which operates I2C at a fixed 100 KHz.)
     @param  clkAfter
-            Speed (in Hz) for Wire transmissions following SSD1306 library
+            Speed (in Hz) for Wire transmissions following SH1106 library
             calls. Defaults to 100000 (100 KHz), the default Arduino Wire
             speed. This is done rather than leaving it at the 'during' speed
             because other devices on the I2C bus might not be compatible
@@ -185,7 +185,7 @@ Adafruit_SH1106_jhh::Adafruit_SH1106_jhh(uint8_t w, uint8_t h, TwoWire *twi,
 }
 
 /*!
-    @brief  Constructor for SPI SSD1306 displays, using software (bitbang)
+    @brief  Constructor for SPI SH1106 displays, using software (bitbang)
             SPI.
     @param  w
             Display width in pixels
@@ -219,7 +219,7 @@ Adafruit_SH1106_jhh::Adafruit_SH1106_jhh(uint8_t w, uint8_t h, int8_t mosi_pin,
       rstPin(rst_pin) {}
 
 /*!
-    @brief  Constructor for SPI SSD1306 displays, using native hardware SPI.
+    @brief  Constructor for SPI SH1106 displays, using native hardware SPI.
     @param  w
             Display width in pixels
     @param  h
@@ -256,7 +256,7 @@ Adafruit_SH1106_jhh::Adafruit_SH1106_jhh(uint8_t w, uint8_t h, SPIClass *spi_ptr
 }
 
 /*!
-    @brief  DEPRECATED constructor for SPI SSD1306 displays, using software
+    @brief  DEPRECATED constructor for SPI SH1106 displays, using software
             (bitbang) SPI. Provided for older code to maintain compatibility
             with the current library. Screen size is determined by enabling
             one of the SH1106_* size defines in Adafruit_SH1106_jhh.h. New
@@ -288,7 +288,7 @@ Adafruit_SH1106_jhh::Adafruit_SH1106_jhh(int8_t mosi_pin, int8_t sclk_pin,
       csPin(cs_pin), rstPin(rst_pin) {}
 
 /*!
-    @brief  DEPRECATED constructor for SPI SSD1306 displays, using native
+    @brief  DEPRECATED constructor for SPI SH1106 displays, using native
             hardware SPI. Provided for older code to maintain compatibility
             with the current library. Screen size is determined by enabling
             one of the SH1106_* size defines in Adafruit_SH1106_jhh.h. New
@@ -318,7 +318,7 @@ Adafruit_SH1106_jhh::Adafruit_SH1106_jhh(int8_t dc_pin, int8_t rst_pin, int8_t c
 }
 
 /*!
-    @brief  DEPRECATED constructor for I2C SSD1306 displays. Provided for
+    @brief  DEPRECATED constructor for I2C SH1106 displays. Provided for
             older code to maintain compatibility with the current library.
             Screen size is determined by enabling one of the SH1106_* size
             defines in Adafruit_SH1106_jhh.h. New code should NOT use this.
@@ -382,14 +382,14 @@ inline void Adafruit_SH1106_jhh::SPIwrite(uint8_t d) {
 }
 
 /*!
-    @brief Issue single command to SSD1306, using I2C or hard/soft SPI as
+    @brief Issue single command to SH1106, using I2C or hard/soft SPI as
    needed. Because command calls are often grouped, SPI transaction and
    selection must be started/ended in calling function for efficiency. This is a
    protected function, not exposed (see sh1106_command() instead).
 
         @param c
                    the command character to send to the display.
-                   Refer to ssd1306 data sheet for commands
+                   Refer to sh1106 data sheet for commands
     @return None (void).
     @note
 */
@@ -406,7 +406,7 @@ void Adafruit_SH1106_jhh::sh1106_command1(uint8_t c) {
 }
 
 /*!
-    @brief Issue list of commands to SSD1306, same rules as above re:
+    @brief Issue list of commands to SH1106, same rules as above re:
    transactions. This is a protected function, not exposed.
         @param c
                    pointer to list of commands
@@ -444,7 +444,7 @@ void Adafruit_SH1106_jhh::sh1106_commandList(const uint8_t *c, uint8_t n) {
 // might rely on that function. This encapsulates the command transfer
 // in a transaction start/end, similar to old library's handling of it.
 /*!
-    @brief  Issue a single low-level command directly to the SSD1306
+    @brief  Issue a single low-level command directly to the SH1106
             display, bypassing the library.
     @param  c
             Command to issue (0x00 to 0xFF, see datasheet).
@@ -463,10 +463,10 @@ void Adafruit_SH1106_jhh::sh1106_command(uint8_t c) {
     @param  vcs
             VCC selection. Pass SH1106_SWITCHCAPVCC to generate the display
             voltage (step up) from the 3.3V source, or SH1106_EXTERNALVCC
-            otherwise. Most situations with Adafruit SSD1306 breakouts will
+            otherwise. Most situations with Adafruit SH1106 breakouts will
             want SH1106_SWITCHCAPVCC.
     @param  addr
-            I2C address of corresponding SSD1306 display (or pass 0 to use
+            I2C address of corresponding SH1106 display (or pass 0 to use
             default of 0x3C for 128x32 display, 0x3D for all others).
             SPI displays (hardware or software) do not use addresses, but
             this argument is still required (pass 0 or any value really,
@@ -474,7 +474,7 @@ void Adafruit_SH1106_jhh::sh1106_command(uint8_t c) {
     @param  reset
             If true, and if the reset pin passed to the constructor is
             valid, a hard reset will be performed before initializing the
-            display. If using multiple SSD1306 displays on the same bus, and
+            display. If using multiple SH1106 displays on the same bus, and
             if they all share the same reset pin, you should only pass true
             on the first display being initialized, false on all others,
             else the already-initialized displays would be reset. Default if
@@ -520,7 +520,7 @@ bool Adafruit_SH1106_jhh::begin(uint8_t vcs, uint8_t addr, bool reset,
     i2caddr = addr ? addr : ((HEIGHT == 32) ? 0x3C : 0x3D);
     // TwoWire begin() function might be already performed by the calling
     // function if it has unusual circumstances (e.g. TWI variants that
-    // can accept different SDA/SCL pins, or if two SSD1306 instances
+    // can accept different SDA/SCL pins, or if two SH1106 instances
     // with different addresses -- only a single begin() is needed).
     if (periphBegin)
       wire->begin();
@@ -553,7 +553,7 @@ bool Adafruit_SH1106_jhh::begin(uint8_t vcs, uint8_t addr, bool reset,
     }
   }
 
-  // Reset SSD1306 if requested and reset pin specified in constructor
+  // Reset SH1106 if requested and reset pin specified in constructor
   if (reset && (rstPin >= 0)) {
     pinMode(rstPin, OUTPUT);
     digitalWrite(rstPin, HIGH);
@@ -986,7 +986,7 @@ uint8_t *Adafruit_SH1106_jhh::getBuffer(void) { return buffer; }
 // REFRESH DISPLAY ---------------------------------------------------------
 
 /*!
-    @brief  Push data currently in RAM to SSD1306 display.
+    @brief  Push data currently in RAM to SH1106 display.
     @return None (void).
     @note   Drawing operations are not visible until this function is
             called. Call after each graphics command, or after a whole set
@@ -1000,7 +1000,7 @@ void Adafruit_SH1106_jhh::display(void) {
     uint8_t *ptr = buffer;
     for (uint8_t page = 0; page < (HEIGHT + 7) / 8; page++) {
         sh1106_command1(0xB0 + page);           // Set PAGEADS
-        sh1106_command1(SH1106_SETLOWCOLUMN + 2);
+        sh1106_command1(SH1106_SETLOWCOLUMN + SH1106_OFFSET_JHH);
         sh1106_command1(SH1106_SETHIGHCOLUMN);
         uint16_t count = WIDTH;
 
@@ -1029,73 +1029,6 @@ void Adafruit_SH1106_jhh::display(void) {
 #if defined(ESP8266)
     yield();
 #endif
-}
-
-
-/*!
-    @param  start
-            First row.
-    @param  stop
-            Last row.
-    @return None (void).
-*/
-  TRANSACTION_START
-  sh1106_command1(start);
-  sh1106_command1(0X00);
-  sh1106_command1(stop);
-  TRANSACTION_END
-}
-
-/*!
-    @param  start
-            First row.
-    @param  stop
-            Last row.
-    @return None (void).
-*/
-  TRANSACTION_START
-                                                 0X00};
-  sh1106_command1(start);
-  sh1106_command1(0X00);
-  sh1106_command1(stop);
-  TRANSACTION_END
-}
-
-/*!
-    @param  start
-            First row.
-    @param  stop
-            Last row.
-    @return None (void).
-*/
-  TRANSACTION_START
-  sh1106_command1(HEIGHT);
-  sh1106_command1(start);
-  sh1106_command1(0X00);
-  sh1106_command1(stop);
-  TRANSACTION_END
-}
-
-/*!
-    @param  start
-            First row.
-    @param  stop
-            Last row.
-    @return None (void).
-*/
-  TRANSACTION_START
-  sh1106_command1(HEIGHT);
-  sh1106_command1(start);
-  sh1106_command1(0X00);
-  sh1106_command1(stop);
-  TRANSACTION_END
-}
-
-/*!
-    @return None (void).
-*/
-  TRANSACTION_START
-  TRANSACTION_END
 }
 
 // OTHER HARDWARE SETTINGS -------------------------------------------------
