@@ -99,6 +99,10 @@ typedef uint32_t PortMask;
 #define SH1106_SETHIGHCOLUMN 0x10 ///< Not currently used
 #define SH1106_SETSTARTLINE 0x40  ///< See datasheet
 
+// Some displays need to be offset by 2 pixels
+//#define SH1106_OFFSET_JHH 2
+#define SH1106_OFFSET_JHH 0
+
 #define SH1106_EXTERNALVCC 0x01  ///< External display voltage source
 #define SH1106_SWITCHCAPVCC 0x02 ///< Gen. display voltage from 3.3V
 #define SSD1306_SWITCHCAPVCC SH1106_SWITCHCAPVCC
