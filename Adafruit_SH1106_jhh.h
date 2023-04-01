@@ -1,5 +1,5 @@
 /*!
- * @file Adafruit_SSD1306.h
+ * @file Adafruit_SH1106_jhh.h
  *
  * This is part of for Adafruit's SSD1306 library for monochrome
  * OLED displays: http://www.adafruit.com/category/63_98
@@ -21,19 +21,19 @@
  *
  */
 
-#ifndef _Adafruit_SSD1306_H_
-#define _Adafruit_SSD1306_H_
+#ifndef _Adafruit_SH1106_JHH_H_
+#define _Adafruit_SH1106_JHH_H_
 
 // ONE of the following three lines must be #defined:
-// #define SSD1306_128_64 ///< DEPRECTAED: old way to specify 128x64 screen
-#define SSD1306_128_32 ///< DEPRECATED: old way to specify 128x32 screen
-// #define SSD1306_96_16  ///< DEPRECATED: old way to specify 96x16 screen
-// This establishes the screen dimensions in old Adafruit_SSD1306 sketches
+// #define SH1106_128_64 ///< DEPRECTAED: old way to specify 128x64 screen
+#define SH1106_128_32 ///< DEPRECATED: old way to specify 128x32 screen
+// #define SH1106_96_16  ///< DEPRECATED: old way to specify 96x16 screen
+// This establishes the screen dimensions in old Adafruit_SH1106_jhh sketches
 // (NEW CODE SHOULD IGNORE THIS, USE THE CONSTRUCTORS THAT ACCEPT WIDTH
 // AND HEIGHT ARGUMENTS).
 
 // Uncomment to disable Adafruit splash logo
-// #define SSD1306_NO_SPLASH
+// #define SH1106_NO_SPLASH
 
 #if defined(ARDUINO_STM32_FEATHER)
 typedef class HardwareSPI SPIClass;
@@ -64,90 +64,84 @@ typedef uint32_t PortMask;
 /// They can be disabled by predefining this macro before including the Adafruit
 /// header client code will then need to be modified to use the scoped enum
 /// values directly
-#ifndef NO_ADAFRUIT_SSD1306_COLOR_COMPATIBILITY
-#define BLACK SSD1306_BLACK     ///< Draw 'off' pixels
-#define WHITE SSD1306_WHITE     ///< Draw 'on' pixels
-#define INVERSE SSD1306_INVERSE ///< Invert pixels
+#ifndef NO_ADAFRUIT_SH1106_COLOR_COMPATIBILITY
+#define BLACK SH1106_BLACK     ///< Draw 'off' pixels
+#define WHITE SH1106_WHITE     ///< Draw 'on' pixels
+#define INVERSE SH1106_INVERSE ///< Invert pixels
 #endif
-/// fit into the SSD1306_ naming scheme
-#define SSD1306_BLACK 0   ///< Draw 'off' pixels
-#define SSD1306_WHITE 1   ///< Draw 'on' pixels
-#define SSD1306_INVERSE 2 ///< Invert pixels
+/// fit into the SH1106_ naming scheme
+#define SH1106_BLACK 0   ///< Draw 'off' pixels
+#define SH1106_WHITE 1   ///< Draw 'on' pixels
+#define SH1106_INVERSE 2 ///< Invert pixels
 
-#define SSD1306_MEMORYMODE 0x20          ///< See datasheet
-#define SSD1306_COLUMNADDR 0x21          ///< See datasheet
-#define SSD1306_PAGEADDR 0x22            ///< See datasheet
-#define SSD1306_SETCONTRAST 0x81         ///< See datasheet
-#define SSD1306_CHARGEPUMP 0x8D          ///< See datasheet
-#define SSD1306_SEGREMAP 0xA0            ///< See datasheet
-#define SSD1306_DISPLAYALLON_RESUME 0xA4 ///< See datasheet
-#define SSD1306_DISPLAYALLON 0xA5        ///< Not currently used
-#define SSD1306_NORMALDISPLAY 0xA6       ///< See datasheet
-#define SSD1306_INVERTDISPLAY 0xA7       ///< See datasheet
-#define SSD1306_SETMULTIPLEX 0xA8        ///< See datasheet
-#define SSD1306_DISPLAYOFF 0xAE          ///< See datasheet
-#define SSD1306_DISPLAYON 0xAF           ///< See datasheet
-#define SSD1306_COMSCANINC 0xC0          ///< Not currently used
-#define SSD1306_COMSCANDEC 0xC8          ///< See datasheet
-#define SSD1306_SETDISPLAYOFFSET 0xD3    ///< See datasheet
-#define SSD1306_SETDISPLAYCLOCKDIV 0xD5  ///< See datasheet
-#define SSD1306_SETPRECHARGE 0xD9        ///< See datasheet
-#define SSD1306_SETCOMPINS 0xDA          ///< See datasheet
-#define SSD1306_SETVCOMDETECT 0xDB       ///< See datasheet
+#define SH1106_MEMORYMODE 0x20          ///< See datasheet
+#define SH1106_COLUMNADDR 0x21          ///< See datasheet
+#define SH1106_PAGEADDR 0x22            ///< See datasheet
+#define SH1106_SETCONTRAST 0x81         ///< See datasheet
+#define SH1106_CHARGEPUMP 0x8D          ///< See datasheet
+#define SH1106_SEGREMAP 0xA0            ///< See datasheet
+#define SH1106_DISPLAYALLON_RESUME 0xA4 ///< See datasheet
+#define SH1106_DISPLAYALLON 0xA5        ///< Not currently used
+#define SH1106_NORMALDISPLAY 0xA6       ///< See datasheet
+#define SH1106_INVERTDISPLAY 0xA7       ///< See datasheet
+#define SH1106_SETMULTIPLEX 0xA8        ///< See datasheet
+#define SH1106_DISPLAYOFF 0xAE          ///< See datasheet
+#define SH1106_DISPLAYON 0xAF           ///< See datasheet
+#define SH1106_COMSCANINC 0xC0          ///< Not currently used
+#define SH1106_COMSCANDEC 0xC8          ///< See datasheet
+#define SH1106_SETDISPLAYOFFSET 0xD3    ///< See datasheet
+#define SH1106_SETDISPLAYCLOCKDIV 0xD5  ///< See datasheet
+#define SH1106_SETPRECHARGE 0xD9        ///< See datasheet
+#define SH1106_SETCOMPINS 0xDA          ///< See datasheet
+#define SH1106_SETVCOMDETECT 0xDB       ///< See datasheet
 
-#define SSD1306_SETLOWCOLUMN 0x00  ///< Not currently used
-#define SSD1306_SETHIGHCOLUMN 0x10 ///< Not currently used
-#define SSD1306_SETSTARTLINE 0x40  ///< See datasheet
+#define SH1106_SETLOWCOLUMN 0x00  ///< Not currently used
+#define SH1106_SETHIGHCOLUMN 0x10 ///< Not currently used
+#define SH1106_SETSTARTLINE 0x40  ///< See datasheet
 
-#define SSD1306_EXTERNALVCC 0x01  ///< External display voltage source
-#define SSD1306_SWITCHCAPVCC 0x02 ///< Gen. display voltage from 3.3V
+#define SH1106_EXTERNALVCC 0x01  ///< External display voltage source
+#define SH1106_SWITCHCAPVCC 0x02 ///< Gen. display voltage from 3.3V
+#define SSD1306_SWITCHCAPVCC SH1106_SWITCHCAPVCC
 
-#define SSD1306_RIGHT_HORIZONTAL_SCROLL 0x26              ///< Init rt scroll
-#define SSD1306_LEFT_HORIZONTAL_SCROLL 0x27               ///< Init left scroll
-#define SSD1306_VERTICAL_AND_RIGHT_HORIZONTAL_SCROLL 0x29 ///< Init diag scroll
-#define SSD1306_VERTICAL_AND_LEFT_HORIZONTAL_SCROLL 0x2A  ///< Init diag scroll
-#define SSD1306_DEACTIVATE_SCROLL 0x2E                    ///< Stop scroll
-#define SSD1306_ACTIVATE_SCROLL 0x2F                      ///< Start scroll
-#define SSD1306_SET_VERTICAL_SCROLL_AREA 0xA3             ///< Set scroll range
 
 // Deprecated size stuff for backwards compatibility with old sketches
-#if defined SSD1306_128_64
-#define SSD1306_LCDWIDTH 128 ///< DEPRECATED: width w/SSD1306_128_64 defined
-#define SSD1306_LCDHEIGHT 64 ///< DEPRECATED: height w/SSD1306_128_64 defined
+#if defined SH1106_128_64
+#define SH1106_LCDWIDTH 128 ///< DEPRECATED: width w/SH1106_128_64 defined
+#define SH1106_LCDHEIGHT 64 ///< DEPRECATED: height w/SH1106_128_64 defined
 #endif
-#if defined SSD1306_128_32
-#define SSD1306_LCDWIDTH 128 ///< DEPRECATED: width w/SSD1306_128_32 defined
-#define SSD1306_LCDHEIGHT 32 ///< DEPRECATED: height w/SSD1306_128_32 defined
+#if defined SH1106_128_32
+#define SH1106_LCDWIDTH 128 ///< DEPRECATED: width w/SH1106_128_32 defined
+#define SH1106_LCDHEIGHT 32 ///< DEPRECATED: height w/SH1106_128_32 defined
 #endif
-#if defined SSD1306_96_16
-#define SSD1306_LCDWIDTH 96  ///< DEPRECATED: width w/SSD1306_96_16 defined
-#define SSD1306_LCDHEIGHT 16 ///< DEPRECATED: height w/SSD1306_96_16 defined
+#if defined SH1106_96_16
+#define SH1106_LCDWIDTH 96  ///< DEPRECATED: width w/SH1106_96_16 defined
+#define SH1106_LCDHEIGHT 16 ///< DEPRECATED: height w/SH1106_96_16 defined
 #endif
 
 /*!
     @brief  Class that stores state and functions for interacting with
             SSD1306 OLED displays.
 */
-class Adafruit_SSD1306 : public Adafruit_GFX {
+class Adafruit_SH1106_jhh : public Adafruit_GFX {
 public:
   // NEW CONSTRUCTORS -- recommended for new projects
-  Adafruit_SSD1306(uint8_t w, uint8_t h, TwoWire *twi = &Wire,
+  Adafruit_SH1106_jhh(uint8_t w, uint8_t h, TwoWire *twi = &Wire,
                    int8_t rst_pin = -1, uint32_t clkDuring = 400000UL,
                    uint32_t clkAfter = 100000UL);
-  Adafruit_SSD1306(uint8_t w, uint8_t h, int8_t mosi_pin, int8_t sclk_pin,
+  Adafruit_SH1106_jhh(uint8_t w, uint8_t h, int8_t mosi_pin, int8_t sclk_pin,
                    int8_t dc_pin, int8_t rst_pin, int8_t cs_pin);
-  Adafruit_SSD1306(uint8_t w, uint8_t h, SPIClass *spi, int8_t dc_pin,
+  Adafruit_SH1106_jhh(uint8_t w, uint8_t h, SPIClass *spi, int8_t dc_pin,
                    int8_t rst_pin, int8_t cs_pin, uint32_t bitrate = 8000000UL);
 
   // DEPRECATED CONSTRUCTORS - for back compatibility, avoid in new projects
-  Adafruit_SSD1306(int8_t mosi_pin, int8_t sclk_pin, int8_t dc_pin,
+  Adafruit_SH1106_jhh(int8_t mosi_pin, int8_t sclk_pin, int8_t dc_pin,
                    int8_t rst_pin, int8_t cs_pin);
-  Adafruit_SSD1306(int8_t dc_pin, int8_t rst_pin, int8_t cs_pin);
-  Adafruit_SSD1306(int8_t rst_pin = -1);
+  Adafruit_SH1106_jhh(int8_t dc_pin, int8_t rst_pin, int8_t cs_pin);
+  Adafruit_SH1106_jhh(int8_t rst_pin = -1);
 
-  ~Adafruit_SSD1306(void);
+  ~Adafruit_SH1106_jhh(void);
 
-  bool begin(uint8_t switchvcc = SSD1306_SWITCHCAPVCC, uint8_t i2caddr = 0,
+  bool begin(uint8_t switchvcc = SH1106_SWITCHCAPVCC, uint8_t i2caddr = 0,
              bool reset = true, bool periphBegin = true);
   void display(void);
   void clearDisplay(void);
@@ -156,12 +150,7 @@ public:
   void drawPixel(int16_t x, int16_t y, uint16_t color);
   virtual void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
   virtual void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
-  void startscrollright(uint8_t start, uint8_t stop);
-  void startscrollleft(uint8_t start, uint8_t stop);
-  void startscrolldiagright(uint8_t start, uint8_t stop);
-  void startscrolldiagleft(uint8_t start, uint8_t stop);
-  void stopscroll(void);
-  void ssd1306_command(uint8_t c);
+  void sh1106_command(uint8_t c);
   bool getPixel(int16_t x, int16_t y);
   uint8_t *getBuffer(void);
 
@@ -169,8 +158,8 @@ protected:
   inline void SPIwrite(uint8_t d) __attribute__((always_inline));
   void drawFastHLineInternal(int16_t x, int16_t y, int16_t w, uint16_t color);
   void drawFastVLineInternal(int16_t x, int16_t y, int16_t h, uint16_t color);
-  void ssd1306_command1(uint8_t c);
-  void ssd1306_commandList(const uint8_t *c, uint8_t n);
+  void sh1106_command1(uint8_t c);
+  void sh1106_commandList(const uint8_t *c, uint8_t n);
 
   SPIClass *spi;   ///< Initialized during construction when using SPI. See
                    ///< SPI.cpp, SPI.h
@@ -205,4 +194,4 @@ protected:
 #endif
 };
 
-#endif // _Adafruit_SSD1306_H_
+#endif // _Adafruit_SH1106_JHH_H_
