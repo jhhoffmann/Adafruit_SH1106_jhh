@@ -25,8 +25,8 @@
 #define _Adafruit_SH1106_JHH_H_
 
 // ONE of the following three lines must be #defined:
-// #define SH1106_128_64 ///< DEPRECTAED: old way to specify 128x64 screen
-#define SH1106_128_32 ///< DEPRECATED: old way to specify 128x32 screen
+#define SH1106_128_64 ///< DEPRECTAED: old way to specify 128x64 screen
+// #define SH1106_128_32 ///< DEPRECATED: old way to specify 128x32 screen
 // #define SH1106_96_16  ///< DEPRECATED: old way to specify 96x16 screen
 // This establishes the screen dimensions in old Adafruit_SH1106_jhh sketches
 // (NEW CODE SHOULD IGNORE THIS, USE THE CONSTRUCTORS THAT ACCEPT WIDTH
@@ -100,8 +100,8 @@ typedef uint32_t PortMask;
 #define SH1106_SETSTARTLINE 0x40  ///< See datasheet
 
 // Some displays need to be offset by 2 pixels
-//#define SH1106_OFFSET_JHH 2
-#define SH1106_OFFSET_JHH 0
+#define SH1106_OFFSET_JHH 2
+//#define SH1106_OFFSET_JHH 0
 
 #define SH1106_EXTERNALVCC 0x01  ///< External display voltage source
 #define SH1106_SWITCHCAPVCC 0x02 ///< Gen. display voltage from 3.3V
